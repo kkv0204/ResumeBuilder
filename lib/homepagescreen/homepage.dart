@@ -1,8 +1,13 @@
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:resume_builder/homepagescreen/data.dart';
+import 'package:resume_builder/homepagescreen/logout.dart';
 import 'package:resume_builder/homepagescreen/home.dart';
 import 'package:resume_builder/homepagescreen/resume_form.dart';
 import 'package:resume_builder/homepagescreen/templates.dart';
+import 'package:resume_builder/main.dart';
+import 'package:resume_builder/templatescreen/home_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);

@@ -1,5 +1,10 @@
+import 'dart:convert';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:resume_builder/homepagescreen/data.dart';
 import 'package:resume_builder/homepagescreen/homepage.dart';
+import 'package:resume_builder/homepagescreen/resume_form.dart';
 import 'package:resume_builder/splashscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,8 +19,6 @@ class _HomeState extends State<Home> {
   String _username = '';
   String _email = '';
   String uIcon = '';
-
-
 
   @override
   void initState() {
@@ -44,77 +47,186 @@ class _HomeState extends State<Home> {
     return WillPopScope(
       onWillPop: () => _onBackButtonPressed(context),
       child: Scaffold(
-        drawer: Drawer(
-          child: ListView(
-            children: [
-              UserAccountsDrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 0, 121, 139),
-                  ),
-                  currentAccountPicture: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: Text(uIcon,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40,color: Color.fromARGB(255, 0, 121, 139),)),),
-                  accountName: Text(_username,style: TextStyle(fontSize: 20),),
-                  accountEmail: Text(_email,style: TextStyle(fontSize: 18),)),
-              Card(
-                child: ListTile(
-                  title: Text("Logout",style: TextStyle(fontSize: 18),),
-                  onTap: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(
-                      builder: (context) {
-                        return Logout();
-                      },
-                    ));
-                  },
-                  leading: Icon(Icons.logout),
-                ),
-              )
-            ],
-          ),
-        ),
-        //backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Center(
-            child: Text("Resume Builder"),
-          ),
+          resizeToAvoidBottomInset: false,
           backgroundColor: Color.fromARGB(255, 0, 121, 139),
-          // leading: Container(
-          //   child: CircleAvatar(radius: 5,backgroundImage: AssetImage("assets/icon.png")),
-          // ),
-        ),
-        body: Center(
-          child: Column(
-            children: [
-              Text(
-                'Home Page',
-                style: TextStyle(
-                    fontSize: 40,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    height: 2),
-              ),
-              SizedBox(height: 20),
-              CircleAvatar(
-                radius: 70,
-                child: Icon(Icons.home, size: 120),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Welcome, '+ _username+'',
-                style: TextStyle(
-                    fontSize: 40,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    height: 2),
-              ),
-            ],
+          drawer: Drawer(
+            child: ListView(
+              children: [
+                UserAccountsDrawerHeader(
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 0, 121, 139),
+                    ),
+                    currentAccountPicture: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: Text(uIcon,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40,
+                            color: Color.fromARGB(255, 0, 121, 139),
+                          )),
+                    ),
+                    accountName: Text(
+                      _username,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    accountEmail: Text(
+                      _email,
+                      style: TextStyle(fontSize: 18),
+                    )),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      "Logout",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    onTap: () {
+                      Navigator.pushReplacement(context, MaterialPageRoute(
+                        builder: (context) {
+                          return Logout();
+                        },
+                      ));
+                    },
+                    leading: Icon(Icons.logout),
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      ),
+          //backgroundColor: Colors.white,
+          appBar: AppBar(
+            elevation: 0.0,
+            title: Text("Resume Builder"),
+            backgroundColor: Color.fromARGB(255, 0, 121, 139),
+            // leading: Container(
+            //   child: CircleAvatar(radius: 5,backgroundImage: AssetImage("assets/icon.png")),
+            // ),
+          ),
+          body: Container(
+            child: Container(
+              height: 800,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  )),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(23, 20, 0, 20),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Create a Resume',
+                              style: TextStyle(
+                                fontSize: 23,
+                                color: Color.fromARGB(255, 0, 121, 139),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              'in few minutes!!',
+                              style: TextStyle(
+                                fontSize: 23,
+                                color: Color.fromARGB(255, 0, 121, 139),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(25.0),
+                            child: Lottie.asset('assets/homescreen.json',
+                                width: 140, height: 140, fit: BoxFit.fill),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 50),
+                  Container(
+                    margin: EdgeInsets.all(30),
+                    height: 300,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 0, 121, 139),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                          bottomLeft: Radius.circular(30),
+                          bottomRight: Radius.circular(30)
+                        )),
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(width: 20.0, height: 100.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                          SizedBox(
+                          child: TyperAnimatedTextKit(
+                              text: [
+                                'Welcome, '+ _username+'',
+                              ],
+                              textStyle: TextStyle(
+                                  fontSize: 30.0,
+                                  fontFamily: "Rumbling",
+                                color: Colors.white
+                              ),
+                              textAlign: TextAlign.start, // or Alignment.topLeft
+                          ),
+                        ),
+                          ],
+                        ),
+                        SizedBox(height: 20,),
+                        ElevatedButton(child: Text('CREATE RESUME'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 0, 121, 139),
+                          side: BorderSide(color: Colors.white,width: 2),
+                            elevation: 15,
+                        ),onPressed: () {
+                          Navigator.push(context,MaterialPageRoute(builder: (context) => ResumeForm(),));
+                        },)
+                      ],
+                    ),
+                  ),
+                  // Text(
+                  //   'Home Page',
+                  //   style: TextStyle(
+                  //       fontSize: 40,
+                  //       color: Colors.black,
+                  //       fontWeight: FontWeight.bold,
+                  //       height: 2),
+                  // ),
+                  // SizedBox(height: 20),
+                  // CircleAvatar(
+                  //   radius: 70,
+                  //   child: Icon(Icons.home, size: 120),
+                  // ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
+                  // Text(
+                  //   'Welcome, '+ _username+'',
+                  //   style: TextStyle(
+                  //       fontSize: 40,
+                  //       color: Colors.black,
+                  //       fontWeight: FontWeight.bold,
+                  //       height: 2),
+                  // ),
+                ],
+              ),
+            ),
+          )),
     );
   }
+
 
   Future<bool> _onBackButtonPressed(BuildContext context) async {
     bool? exitApp = await showDialog(

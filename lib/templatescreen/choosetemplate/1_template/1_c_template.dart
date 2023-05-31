@@ -5,9 +5,13 @@ import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 import 'dart:typed_data';
 
+import 'package:resume_builder/templatescreen/choosetemplate/3_template/3_designer.dart';
+import 'package:resume_builder/templatescreen/choosetemplate/2_template/2_classic.dart';
+import 'package:resume_builder/templatescreen/choosetemplate/settings.dart';
 import 'package:resume_builder/templatescreen/choosetemplate/1_template/1_classic.dart';
 
 import 'package:resume_builder/resumeformscreen/sharedpreference.dart';
+import '../../../resumeformscreen/personal_details/personal_form.dart';
 
 class ResumePage extends StatefulWidget {
   const ResumePage({Key? key}) : super(key: key);

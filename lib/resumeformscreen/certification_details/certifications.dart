@@ -30,10 +30,10 @@ class _CertificateFormState extends State<CertificateForm> {
   // TextEditingController startDateController = TextEditingController();
   // TextEditingController endDate = TextEditingController();
   TextEditingController linkController = TextEditingController();
-  // late String startDate;
-  // late String endDate;
-  DateTime? startdate;
-  DateTime? enddate;
+  late String startDate;
+  late String endDate;
+  // DateTime? startdate;
+  // DateTime? enddate;
 
   Future saveCertificationInfo() async {
 
@@ -47,8 +47,8 @@ class _CertificateFormState extends State<CertificateForm> {
       "u_id":userid.toString(),
       "c_issue_desc":courseIssueDescController.text,
       "c_coursename":courseNameController.text,
-      "c_sdate": startdate.toString(),
-      "c_edate": enddate.toString(),
+      "c_sdate": startDate.toString(),
+      "c_edate": endDate.toString(),
       "c_certificatelink":linkController.text,
       "is_enabled":"true"
     });
@@ -92,8 +92,8 @@ class _CertificateFormState extends State<CertificateForm> {
     Map<String, dynamic> certificationInfo = {
       "issue_desc":courseIssueDescController.text,
       "course_name":courseNameController.text,
-      "start_date": startdate.toString(),
-      "end_date": enddate.toString(),
+      "start_date": startDate.toString(),
+      "end_date": endDate.toString(),
       "link":linkController.text
     };
     certificationList.add(certificationInfo);
@@ -267,101 +267,101 @@ onWillPop: () => _onBackButtonPressed(context),
                           ),
                         ),
                         const SizedBox(height: 20,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                      color: Colors.grey[300],
-                                      borderRadius: BorderRadius.circular(10)
-                                  ),
-                              padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                              width: MediaQuery.of(context).size.width * 0.94,
-                              child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.date_range,
-                                            size: 18.0,
-                                            color: Color.fromARGB(255, 0, 121, 139),
-                                          ),
-                                          Column(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    '${startdate != null ? DateFormat("dd-MM-yyyy").format(startdate!) : '-'}' ,
-                                                    style: TextStyle(
-                                                        color: Color.fromARGB(255, 0, 121, 139),
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 18.0),
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Text(' ${enddate != null ? DateFormat("dd-MM-yyyy").format(enddate!) : '-'}',style: TextStyle(
-                                                      color: Color.fromARGB(255, 0, 121, 139),
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 18.0),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                    //   Text(
-                                    //   '${startdate != null ? DateFormat("dd-MM-yyyy").format(startdate!) : '-'} / ${enddate != null ? DateFormat("dd-MM-yyyy").format(enddate!) : '-'}',
-                                    //   style: const TextStyle(
-                                    //     fontWeight: FontWeight.w400,
-                                    //     fontSize: 18,
-                                    //     color: Colors.black,
-                                    //   ),
-                                    // ),
-
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                        child:
-                                        ElevatedButton(style: ElevatedButton.styleFrom(
-                                            primary: //Colors.blue
-                                            Color.fromARGB(255, 0, 121, 139)
-                                        ),onPressed: () async{
-                                          final result=await showDateRangePicker(context: context, firstDate: DateTime(2000), lastDate: DateTime.now().add(Duration(days: 356),),
-                                            builder: (context, child) {
-                                              return Theme(
-                                                data: Theme.of(context).copyWith(
-                                                  colorScheme: ColorScheme.light(
-                                                    primary: Color.fromARGB(255, 0, 121, 139) ,// <-- SEE HERE
-                                                    onPrimary: Colors.white, // <-- SEE HERE
-                                                    onSurface: Colors.black, // <-- SEE HERE
-                                                  ),
-                                                  textButtonTheme: TextButtonThemeData(
-                                                    style: TextButton.styleFrom(
-                                                      primary: Colors.white, // button text color
-                                                    ),
-                                                  ),
-                                                ),
-                                                child: child!,
-                                              );
-                                            },
-                                          );
-                                          if(result!=null){
-                                            setState(() {
-                                              startdate=result.start;
-                                              enddate=result.end;
-                                            });
-                                          }
-                                        }, child: Text("Date Range Picker")),
-                                      ),
-                                        ],
-                                      ),
-                                    ],
-                              ),
-                            ),
-                          ],
-                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        //   children: [
+                        //     Container(
+                        //       decoration: BoxDecoration(
+                        //               color: Colors.grey[300],
+                        //               borderRadius: BorderRadius.circular(10)
+                        //           ),
+                        //       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        //       width: MediaQuery.of(context).size.width * 0.94,
+                        //       child: Column(
+                        //             mainAxisAlignment: MainAxisAlignment.start,
+                        //             crossAxisAlignment: CrossAxisAlignment.start,
+                        //             children: [
+                        //               Row(
+                        //                 children: <Widget>[
+                        //                   Icon(
+                        //                     Icons.date_range,
+                        //                     size: 18.0,
+                        //                     color: Color.fromARGB(255, 0, 121, 139),
+                        //                   ),
+                        //                   Column(
+                        //                     children: [
+                        //                       Row(
+                        //                         children: [
+                        //                           Text(
+                        //                             '${startdate != null ? DateFormat("dd-MM-yyyy").format(startdate!) : '-'}' ,
+                        //                             style: TextStyle(
+                        //                                 color: Color.fromARGB(255, 0, 121, 139),
+                        //                                 fontWeight: FontWeight.bold,
+                        //                                 fontSize: 18.0),
+                        //                           ),
+                        //                         ],
+                        //                       ),
+                        //                       Row(
+                        //                         children: [
+                        //                           Text(' ${enddate != null ? DateFormat("dd-MM-yyyy").format(enddate!) : '-'}',style: TextStyle(
+                        //                               color: Color.fromARGB(255, 0, 121, 139),
+                        //                               fontWeight: FontWeight.bold,
+                        //                               fontSize: 18.0),
+                        //                           ),
+                        //                         ],
+                        //                       ),
+                        //                     ],
+                        //                   ),
+                        //             //   Text(
+                        //             //   '${startdate != null ? DateFormat("dd-MM-yyyy").format(startdate!) : '-'} / ${enddate != null ? DateFormat("dd-MM-yyyy").format(enddate!) : '-'}',
+                        //             //   style: const TextStyle(
+                        //             //     fontWeight: FontWeight.w400,
+                        //             //     fontSize: 18,
+                        //             //     color: Colors.black,
+                        //             //   ),
+                        //             // ),
+                        //
+                        //               Padding(
+                        //                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                        //                 child:
+                        //                 ElevatedButton(style: ElevatedButton.styleFrom(
+                        //                     primary: //Colors.blue
+                        //                     Color.fromARGB(255, 0, 121, 139)
+                        //                 ),onPressed: () async{
+                        //                   final result=await showDateRangePicker(context: context, firstDate: DateTime(2000), lastDate: DateTime.now().add(Duration(days: 356),),
+                        //                     builder: (context, child) {
+                        //                       return Theme(
+                        //                         data: Theme.of(context).copyWith(
+                        //                           colorScheme: ColorScheme.light(
+                        //                             primary: Color.fromARGB(255, 0, 121, 139) ,// <-- SEE HERE
+                        //                             onPrimary: Colors.white, // <-- SEE HERE
+                        //                             onSurface: Colors.black, // <-- SEE HERE
+                        //                           ),
+                        //                           textButtonTheme: TextButtonThemeData(
+                        //                             style: TextButton.styleFrom(
+                        //                               primary: Colors.white, // button text color
+                        //                             ),
+                        //                           ),
+                        //                         ),
+                        //                         child: child!,
+                        //                       );
+                        //                     },
+                        //                   );
+                        //                   if(result!=null){
+                        //                     setState(() {
+                        //                       startdate=result.start;
+                        //                       enddate=result.end;
+                        //                     });
+                        //                   }
+                        //                 }, child: Text("Date Range Picker")),
+                        //               ),
+                        //                 ],
+                        //               ),
+                        //             ],
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                                         // ElevatedButton(
                                         //   style: ElevatedButton.styleFrom(
                                         //       primary: //Colors.blue
@@ -401,51 +401,55 @@ onWillPop: () => _onBackButtonPressed(context),
                                         //   );
                                         // }, child: Text("Add Date"),),
 
-                            // Container(
-                            //   decoration: BoxDecoration(
-                            //       color: Colors.grey[300],
-                            //       borderRadius: BorderRadius.circular(10)
-                            //   ),
-                            //   padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
-                            //   width: MediaQuery.of(context).size.width * 0.45,
-                            //   child:
-                            //   DateTimePicker(
-                            //     decoration: textFieldDecoration("Start date", "Start date"),
-                            //     firstDate: DateTime(1900),
-                            //     lastDate: DateTime.now(),
-                            //     dateLabelText: "Start date",
-                            //     onChanged: (val) {
-                            //       String formatDate = val.toString();
-                            //       var pos = formatDate.lastIndexOf(' ');
-                            //       String result = (pos != -1)? formatDate.substring(0, pos): formatDate;
-                            //       setState(() {
-                            //         startDate = result;
-                            //       });
-                            //     },
-                            //   ),
-                            // ),
-                            // Container(
-                            //   decoration: BoxDecoration(
-                            //       color: Colors.grey[300],
-                            //       borderRadius: BorderRadius.circular(10)
-                            //   ),
-                            //   padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
-                            //   width: MediaQuery.of(context).size.width * 0.45,
-                            //   child: DateTimePicker(
-                            //     decoration: textFieldDecoration("End date", "End date"),
-                            //     firstDate: DateTime(1900),
-                            //     lastDate: DateTime.now(),
-                            //     dateLabelText: "End date",
-                            //     onChanged: (val) {
-                            //       String formatDate = val.toString();
-                            //       var pos = formatDate.lastIndexOf(' ');
-                            //       String result = (pos != -1)? formatDate.substring(0, pos): formatDate;
-                            //       setState(() {
-                            //         endDate = result;
-                            //       });
-                            //     },
-                            //   ),
-                            // ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[300],
+                                  borderRadius: BorderRadius.circular(10)
+                              ),
+                              padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+                              width: MediaQuery.of(context).size.width * 0.45,
+                              child: DateTimePicker(
+                                decoration: textFieldDecoration("Start date", "Start date"),
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime.now(),
+                                dateLabelText: "Start date",
+                                onChanged: (val) {
+                                  String formatDate = val.toString();
+                                  var pos = formatDate.lastIndexOf(' ');
+                                  String result = (pos != -1)? formatDate.substring(0, pos): formatDate;
+                                  setState(() {
+                                    startDate = result;
+                                  });
+                                },
+                              ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[300],
+                                  borderRadius: BorderRadius.circular(10)
+                              ),
+                              padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+                              width: MediaQuery.of(context).size.width * 0.45,
+                              child: DateTimePicker(
+                                decoration: textFieldDecoration("End date", "End date"),
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime.now(),
+                                dateLabelText: "End date",
+                                onChanged: (val) {
+                                  String formatDate = val.toString();
+                                  var pos = formatDate.lastIndexOf(' ');
+                                  String result = (pos != -1)? formatDate.substring(0, pos): formatDate;
+                                  setState(() {
+                                    endDate = result;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                         const SizedBox(height: 20,),
                         Container(
                           decoration: BoxDecoration(

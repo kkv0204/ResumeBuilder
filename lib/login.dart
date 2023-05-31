@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:resume_builder/homepagescreen/data.dart';
+import 'package:resume_builder/homepagescreen/home.dart';
 import 'package:resume_builder/homepagescreen/homepage.dart';
+import 'package:resume_builder/main.dart';
 import 'package:resume_builder/signup.dart';
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,9 +11,11 @@ import 'package:resume_builder/splashscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -19,7 +24,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 class LoginPage extends StatefulWidget {
   @override
   LoginPageState createState() => LoginPageState();
@@ -29,32 +33,29 @@ class LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController email = TextEditingController();
   TextEditingController pass = TextEditingController();
-  bool passToggle = true;
-
-  Future login() async {
-
-
+  bool passToggle=true;
+  //Future register() async {
+  void login() async {
     String useremail = email.text.trim();
     String password = pass.text.trim();
 
-    if (useremail.isEmpty) {
+    if(useremail.isEmpty){
       Fluttertoast.showToast(msg: "Please enter a email");
       return;
     }
-    if (password.isEmpty) {
+    if(password.isEmpty){
       Fluttertoast.showToast(msg: "Please enter a password");
       return;
     }
 
-    var url = Uri.parse(
-        'https://testresumebuilder.000webhostapp.com/capstone/login.php');
+    var url = Uri.parse('https://testresumebuilder.000webhostapp.com/capstone/login.php');
     var response = await http.post(url, body: {
       "email": email.text,
       "password": pass.text,
     });
     var data = json.decode(response.body);
     if (data['status'] == 'Success') {
-      var userid = int.parse(data['userid']);
+      var userid=int.parse(data['userid']);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setInt('userid', userid);
       String userName = data['username'];
@@ -68,29 +69,27 @@ class LoginPageState extends State<LoginPage> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
-          backgroundColor: Color.fromARGB(255, 0, 121, 139),
+          backgroundColor: Color.fromARGB(255,0,121,139),
           textColor: Colors.white,
-          fontSize: 16.0);
-      var sharedPref = await SharedPreferences.getInstance(); //
-      sharedPref.setBool(SplashScreenState.KEYLOGIN, true); //
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MyHomePage(),
-        ),
+          fontSize: 16.0
       );
+      var sharedPref=await SharedPreferences.getInstance();//
+      sharedPref.setBool(SplashScreenState.KEYLOGIN, true);//
+      Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) =>MyHomePage(),),);
     } else {
       Fluttertoast.showToast(
           msg: "Unsuccessful",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
-          backgroundColor: Color.fromARGB(255, 0, 121, 139),
+          backgroundColor: Color.fromARGB(255,0,121,139),
           textColor: Colors.white,
-          fontSize: 16.0);
+          fontSize: 16.0
+
+      );
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,48 +102,41 @@ class LoginPageState extends State<LoginPage> {
           leading: IconButton(
             onPressed: () {
               //Navigator.pop(context);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SplashScreen(),
-                  ));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen(),));
             },
-            icon: Icon(
-              Icons.arrow_back,
+            icon: Icon(Icons.arrow_back,
               size: 20,
-              color: Colors.black,
-            ),
+              color: Colors.black,),
+
           ),
         ),
         body: Container(
-          height: MediaQuery.of(context).size.height,
+          height: MediaQuery
+              .of(context)
+              .size
+              .height,
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Expanded(
-                  child: Column(
+              Expanded(child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                      Text(
-                        "Login",
+                      Text("Login",
                         style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Login to your account",
-                        style: TextStyle(fontSize: 15, color: Colors.grey[700]),
-                      )
+                            fontSize: 30, fontWeight: FontWeight.bold),),
+                      SizedBox(height: 20,),
+                      Text("Login to your account",
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[700]),)
                     ],
                   ),
                   Form(
                       key: _formKey,
-                      child: Container(
+                      child:Container(
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: Column(
                           children: [
@@ -152,44 +144,42 @@ class LoginPageState extends State<LoginPage> {
                               children: <Widget>[
                                 SizedBox(height: 20),
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                                   child: TextFormField(
-                                    keyboardType: TextInputType.emailAddress,
+                                    keyboardType :TextInputType.emailAddress,
                                     controller: email,
                                     decoration: InputDecoration(
                                       labelText: "Email",
                                       border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                      contentPadding:
-                                          EdgeInsets.fromLTRB(10, 37, 10, 5),
+                                          borderRadius: BorderRadius.circular(50)
+                                      ),
+                                      contentPadding: EdgeInsets.fromLTRB(10, 37, 10, 5),
                                       prefixIcon: Icon(Icons.person),
                                     ),
                                     validator: (value) {
                                       String useremail = email.text.trim();
-                                      String emailPattern =
-                                          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
-                                      if (value!.isEmpty) {
+                                      String emailPattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+                                      if(value!.isEmpty){
                                         return "Please enter a email";
-                                      } else if (!RegExp(emailPattern)
-                                          .hasMatch(useremail)) {
+                                      }
+                                      else if (!RegExp(emailPattern).hasMatch(useremail)) {
                                         return "Please enter a valid email address";
                                       }
                                       return null;
                                     },
                                   ),
                                 ),
+
                                 SizedBox(height: 20),
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(30, 0, 30, 0),
+
+                                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                                   child: TextFormField(
-                                    keyboardType: TextInputType.emailAddress,
+                                    keyboardType :TextInputType.emailAddress,
                                     controller: pass,
                                     obscureText: passToggle,
                                     validator: (value) {
-                                      if (pass.text.isEmpty) {
+                                      if(pass.text.isEmpty){
                                         return "Please enter a password";
                                       }
                                       return null;
@@ -197,21 +187,19 @@ class LoginPageState extends State<LoginPage> {
                                     decoration: InputDecoration(
                                         labelText: "Password",
                                         border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(200)),
-                                        contentPadding:
-                                            EdgeInsets.fromLTRB(10, 27, 10, 5),
+                                            borderRadius: BorderRadius.circular(200)
+                                        ),
+                                        contentPadding: EdgeInsets.fromLTRB(10, 27, 10, 5),
                                         prefixIcon: Icon(Icons.lock),
                                         suffix: InkWell(
-                                          onTap: () {
+                                          onTap: (){
                                             setState(() {
-                                              passToggle = !passToggle;
+                                              passToggle=!passToggle;
                                             });
                                           },
-                                          child: Icon(passToggle
-                                              ? Icons.visibility
-                                              : Icons.visibility_off),
-                                        )),
+                                          child: Icon(passToggle?Icons.visibility:Icons.visibility_off),
+                                        )
+                                    ),
                                   ),
                                 ),
                               ],
@@ -219,7 +207,8 @@ class LoginPageState extends State<LoginPage> {
                             SizedBox(height: 40),
                             Container(
                               padding: EdgeInsets.fromLTRB(80, 0, 80, 0),
-                              decoration: BoxDecoration(
+                              decoration:
+                              BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
                                 // border: Border(
                                 //   bottom: BorderSide(color: Colors.black),
@@ -234,7 +223,9 @@ class LoginPageState extends State<LoginPage> {
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
                                     login();
-
+                                    data d=new data();
+                                    d.email=email.text;
+                                    data.useremail.add(d);
                                   }
                                 },
                                 color: Color.fromARGB(255, 0, 121, 139),
@@ -243,18 +234,18 @@ class LoginPageState extends State<LoginPage> {
                                   borderRadius: BorderRadius.circular(70),
                                 ),
                                 child: Text(
-                                  "Login",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                  ),
+                                  "Login", style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
                                 ),
                               ),
                             ),
                           ],
                         ),
                       )),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -264,37 +255,38 @@ class LoginPageState extends State<LoginPage> {
                         //minWidth: double.infinity,
                         //height: 50,
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignUpPage()));
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => SignUpPage()));
                         },
                         // color: Color(0xff0095FF),
                         // shape: RoundedRectangleBorder(
                         //   borderRadius: BorderRadius.circular(50)
                         //),
                         child: Text(
-                          "Sign up",
-                          style: TextStyle(color: Colors.blue, fontSize: 20),
+                          "Sign up",style: TextStyle(color: Colors.blue,fontSize: 20),
                         ),
                       ),
                     ],
                   ),
+
+
                   Container(
                     padding: EdgeInsets.only(top: 100),
                     height: 200,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage("assets/icon.png"),
-                            fit: BoxFit.fitHeight)),
+                            fit: BoxFit.fitHeight
+                        )
+                    ),
                   )
                 ],
               ))
             ],
           ),
-        ));
+        )
+    );
   }
-
   Widget inputFile1({label, obscureText = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -302,7 +294,10 @@ class LoginPageState extends State<LoginPage> {
         Text(
           label,
           style: TextStyle(
-              fontSize: 15, fontWeight: FontWeight.w400, color: Colors.black87),
+              fontSize: 15,
+              fontWeight: FontWeight.w400,
+              color: Colors.black87
+          ),
         ),
         SizedBox(
           height: 5,
@@ -311,12 +306,17 @@ class LoginPageState extends State<LoginPage> {
           controller: email,
           obscureText: obscureText,
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+            contentPadding: EdgeInsets.symmetric(vertical: 0,
+                horizontal: 10),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey),
+              borderSide: BorderSide(
+                  color: Colors.grey
+              ),
             ),
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey),
+              borderSide: BorderSide(
+                  color: Colors.grey
+              ),
             ),
           ),
         ),
@@ -324,7 +324,6 @@ class LoginPageState extends State<LoginPage> {
       ],
     );
   }
-
   Widget inputFile2({label, obscureText = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -332,7 +331,10 @@ class LoginPageState extends State<LoginPage> {
         Text(
           label,
           style: TextStyle(
-              fontSize: 15, fontWeight: FontWeight.w400, color: Colors.black87),
+              fontSize: 15,
+              fontWeight: FontWeight.w400,
+              color: Colors.black87
+          ),
         ),
         SizedBox(
           height: 5,
@@ -341,15 +343,21 @@ class LoginPageState extends State<LoginPage> {
           controller: pass,
           obscureText: obscureText,
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+            contentPadding: EdgeInsets.symmetric(vertical: 0,
+                horizontal: 10),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey),
+              borderSide: BorderSide(
+                  color: Colors.grey
+              ),
             ),
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey),
+              borderSide: BorderSide(
+                  color: Colors.grey
+              ),
             ),
           ),
         ),
+
         SizedBox(height: 10),
       ],
     );

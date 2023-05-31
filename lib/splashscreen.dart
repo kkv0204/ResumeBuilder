@@ -3,8 +3,11 @@ import 'package:resume_builder/homepagescreen/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:resume_builder/homepagescreen/home.dart';
 import 'package:resume_builder/login.dart';
+import 'package:resume_builder/resumeformscreen/sharedpreference.dart';
 import 'package:resume_builder/signup.dart';
+import 'package:resume_builder/templatescreen/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {

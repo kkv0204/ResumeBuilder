@@ -214,7 +214,7 @@ class PersonalFormState extends State<PersonalForm> {
                         return null;
                       },
                       decoration:
-                          textFieldDecoration("First Name", "First Name"),
+                      textFieldDecoration("First Name", "First Name"),
                     ),
                   ),
                   const SizedBox(
@@ -237,7 +237,7 @@ class PersonalFormState extends State<PersonalForm> {
                       //   return null;
                       // },
                       decoration:
-                          textFieldDecoration("Middle Name", " Middle Name"),
+                      textFieldDecoration("Middle Name", " Middle Name"),
                     ),
                   ),
                   const SizedBox(
@@ -285,7 +285,7 @@ class PersonalFormState extends State<PersonalForm> {
                         return null;
                       },
                       decoration:
-                          textFieldDecoration("Enter your email", "Email"),
+                      textFieldDecoration("Enter your email", "Email"),
                     ),
                   ),
                   const SizedBox(
@@ -534,7 +534,7 @@ class PersonalFormState extends State<PersonalForm> {
                         return null;
                       },
                       decoration:
-                          textFieldDecoration("Enter your area", "Area"),
+                      textFieldDecoration("Enter your area", "Area"),
                     ),
                   ),
                   const SizedBox(
@@ -620,7 +620,7 @@ class PersonalFormState extends State<PersonalForm> {
                         return null;
                       },
                       decoration:
-                          textFieldDecoration("Enter your pincode", "Pincode"),
+                      textFieldDecoration("Enter your pincode", "Pincode"),
                     ),
                   ),
 
@@ -649,7 +649,7 @@ class PersonalFormState extends State<PersonalForm> {
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           primary: //Colors.blue
-                              Color.fromARGB(255, 0, 121, 139)),
+                          Color.fromARGB(255, 0, 121, 139)),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           savePersonalInfo();
