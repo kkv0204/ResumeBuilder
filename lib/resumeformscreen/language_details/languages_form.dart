@@ -40,10 +40,15 @@ class _LanguagesFormState extends State<LanguagesForm> {
     await _prefs.saveToSharedPref('languages', jsonEncode(languagesList));
   }
 
-  Future saveLanguage() async {
+  saveLocalLanguage() async{
     languagesList.add(languagecontroller.text);
     await _prefs.saveToSharedPref('languages', jsonEncode(languagesList));
+  }
 
+
+
+
+  Future saveLanguage() async {
     var url = Uri.parse('https://testresumebuilder.000webhostapp.com/capstone/language_details.php');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String userid = prefs.get("userid").toString();
@@ -147,7 +152,7 @@ class _LanguagesFormState extends State<LanguagesForm> {
                             child:GestureDetector(
                               onTap: (){
                                 if (_formKey.currentState!.validate()) {
-                                  saveLanguage();
+                                  saveLocalLanguage();
                                   languagecontroller.text = "";
                                   setState(() { });
                                 }
@@ -224,8 +229,6 @@ class _LanguagesFormState extends State<LanguagesForm> {
                                 ),
                                 child:GestureDetector(
                                   onTap: (){
-
-
                                     setState(() {
                                       saveSuggestedLanguage(index);
                                     });
@@ -234,6 +237,24 @@ class _LanguagesFormState extends State<LanguagesForm> {
                             );
                           }
                           ))
+                  ),
+                  SizedBox(height: 20,),
+                  const Divider(
+                    height: 2,
+                    color: Colors.black87,
+                  ),
+                  SizedBox(height: 15,),
+                  Center(
+                    child: ElevatedButton( style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 0, 121, 139),
+                      // side: BorderSide(color: Colors.white,width: 2),
+                      elevation: 25,
+                    ),onPressed: () {
+                      saveLanguage();
+                      languagecontroller.text = "";
+                      setState(() { });
+
+                    }, child: Text("Save")),
                   )
                 ],
               )

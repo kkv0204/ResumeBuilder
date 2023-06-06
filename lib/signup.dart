@@ -94,7 +94,7 @@ class _SignUpPageState extends State<SignUpPage> {
     var data = json.decode(response.body);
     if (data == "Error") {
       Fluttertoast.showToast(
-          msg: "User Already exist!",
+          msg: "Email Already exist!",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,

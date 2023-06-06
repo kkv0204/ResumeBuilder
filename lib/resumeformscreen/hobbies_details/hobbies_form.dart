@@ -40,10 +40,12 @@ class _HobbiesFormState extends State<HobbiesForm> {
     await _prefs.saveToSharedPref('hobbies', jsonEncode(hobbiesList));
   }
 
-  Future saveLanguage() async {
+  saveLocalHobbies() async{
     hobbiesList.add(hobbiescontroller.text);
     await _prefs.saveToSharedPref('hobbies', jsonEncode(hobbiesList));
+  }
 
+  Future saveHobbies() async {
     var url = Uri.parse('https://testresumebuilder.000webhostapp.com/capstone/hobbies_details.php');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String userid = prefs.get("userid").toString();
@@ -146,11 +148,10 @@ class _HobbiesFormState extends State<HobbiesForm> {
                             ),
                             child:GestureDetector(
                               onTap: (){
-                                if (_formKey.currentState!.validate()) {
-                                  saveLanguage();
-                                  hobbiescontroller.text = "";
-                                  setState(() { });
-                                }
+                                saveLocalHobbies();
+                                hobbiescontroller.text = "";
+                                setState(() { });
+
                               },
                               child: const Icon(Icons.add),
                             )
@@ -224,8 +225,9 @@ class _HobbiesFormState extends State<HobbiesForm> {
                                 ),
                                 child:GestureDetector(
                                   onTap: (){
-
-
+                                    // saveLocalHobbies();
+                                    // hobbiescontroller.text = "";
+                                    // setState(() { });
                                     setState(() {
                                       saveSuggestedLanguage(index);
                                     });
@@ -234,6 +236,24 @@ class _HobbiesFormState extends State<HobbiesForm> {
                             );
                           }
                           ))
+                  ),
+                  SizedBox(height: 20,),
+                  const Divider(
+                    height: 2,
+                    color: Colors.black87,
+                  ),
+                  SizedBox(height: 15,),
+                  Center(
+                    child: ElevatedButton( style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 0, 121, 139),
+                      // side: BorderSide(color: Colors.white,width: 2),
+                      elevation: 25,
+                    ),onPressed: () {
+                      saveHobbies();
+                      hobbiescontroller.text = "";
+                      setState(() { });
+
+                    }, child: Text("Save")),
                   )
                 ],
               )

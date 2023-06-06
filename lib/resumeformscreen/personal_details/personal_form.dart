@@ -393,7 +393,7 @@ class PersonalFormState extends State<PersonalForm> {
                             const EdgeInsets.only(left: 20, right: 20),
                             dropdownMaxHeight: 200,
                             dropdownDecoration: BoxDecoration(
-                              color: Colors.grey,
+                              color: Colors.grey[300],
                             ),
                             scrollbarRadius: const Radius.circular(40),
                             scrollbarThickness: 6,
@@ -485,7 +485,7 @@ class PersonalFormState extends State<PersonalForm> {
                             const EdgeInsets.only(left: 20, right: 20),
                             dropdownMaxHeight: 200,
                             dropdownDecoration: BoxDecoration(
-                              color: Colors.blueGrey,
+                              color: Colors.grey[300],
                             ),
                             scrollbarRadius: const Radius.circular(40),
                             scrollbarThickness: 6,

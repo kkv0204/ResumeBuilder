@@ -40,10 +40,13 @@ class _SkillsState extends State<Skills> {
     await _prefs.saveToSharedPref('skills', jsonEncode(skills));
   }
 
-  Future saveSkill() async {
+  //local plus dabavsu to ema thi add thase
+  localSave() async {
     skills.add(controller.text);
     await _prefs.saveToSharedPref('skills', jsonEncode(skills));
+  }
 
+  Future saveSkill() async {
     var url = Uri.parse('https://testresumebuilder.000webhostapp.com/capstone/skills_details.php');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String userid = prefs.get("userid").toString();
@@ -128,13 +131,13 @@ class _SkillsState extends State<Skills> {
                             cursorColor: Color.fromARGB(255,0,121,139),
                             controller: controller,
                             decoration: textFieldDecoration("Enter a single skill here", "Professional Skills"),
-                            validator: (value){
-                              if (controller.text.isEmpty) {
-                                return "Professional Skill field cannot be empty";
-                              } else {
-                                return null;
-                              }
-                            },
+                            // validator: (value){
+                            //   if (controller.text.isEmpty) {
+                            //     return "Professional Skill field cannot be empty";
+                            //   } else {
+                            //     return null;
+                            //   }
+                            // },
                           ),
                         ),
                         Container(
@@ -147,12 +150,12 @@ class _SkillsState extends State<Skills> {
                             child:GestureDetector(
                               onTap: (){
                                 if (_formKey.currentState!.validate()) {
-                                  saveSkill();
+                                    localSave();
                                     controller.text = "";
                                   setState(() { });
                                 }
                               },
-                              child: const Icon(Icons.add),
+                              child: const Icon(Icons.add,color: Colors.white,),
                             )
 
                         )
@@ -235,7 +238,38 @@ class _SkillsState extends State<Skills> {
                             );
                           }
                           ))
-                  )
+                  ),
+                  SizedBox(height: 20,),
+                  const Divider(
+                    height: 2,
+                    color: Colors.black87,
+                  ),
+                SizedBox(height: 15,),
+                Center(
+                  child: ElevatedButton( style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 0, 121, 139),
+                   // side: BorderSide(color: Colors.white,width: 2),
+                    elevation: 25,
+                  ),onPressed: () {
+                    //  if (_formKey.currentState!.validate()) {
+                            saveSkill();
+                            controller.text = "";
+                            setState(() { });
+                      //    }
+                    }, child: Text("Save")),
+                )
+                  // GestureDetector(
+                  //   onTap: (){
+                  //     if (_formKey.currentState!.validate()) {
+                  //       saveSkill();
+                  //         controller.text = "";
+                  //       setState(() { });
+                  //     }
+                  //   },
+                  //   child: const Icon(Icons.add),
+                  // )
+
+
                 ],
               )
           ),
